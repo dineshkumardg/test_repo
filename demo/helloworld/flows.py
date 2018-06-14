@@ -3,6 +3,7 @@ from viewflow import frontend
 from viewflow.base import this, Flow
 from viewflow.flow.views import CreateProcessView, UpdateProcessView
 
+from .views import ManagerApprovalView
 from .models import HelloWorldProcess
 
 
@@ -19,7 +20,13 @@ class HelloWorldFlow(Flow):
         ).Next(this.approve)
     )
 
-    approve = (
+    manager_approve = (
+    	flow.View(
+    		UpdateProcessView
+    		)
+    	)
+
+    gm_approve = (
         flow.View(
             UpdateProcessView,
             fields=["approved"]
